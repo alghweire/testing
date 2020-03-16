@@ -41,7 +41,25 @@ public class LoginTestCases {
         Assert.assertEquals(actualText, "Let's get it started!");
 
     }
+    @Test
+    public void LoginEmptyCredentialsTest() throws InterruptedException {
 
+        //email locator
+        Thread.sleep(3000);
+        driver.findElement(By.cssSelector("#email")).sendKeys("");
+        //password locator
+        Thread.sleep(3000);
+        driver.findElement(By.cssSelector("#password")).sendKeys("");
+        Thread.sleep(2000);
+        driver.findElement(By.cssSelector("[type='submit']")).click();
+
+        String emailErrorMessage = driver.findElement(By.cssSelector("input#email+div")).getText();
+        Assert.assertEquals(emailErrorMessage, "Email is required");
+
+        String passwordErrorMessage = driver.findElement(By.cssSelector("input#password+div+div")).getText();
+        Assert.assertEquals(passwordErrorMessage, "Password is required");
+
+    }
     @Test
     public void LoginWrongCredentialsTest() throws InterruptedException {
 
