@@ -6,6 +6,7 @@
             <class name="LoginTestCases"/>
             <class name="SignupTestCases"/>
             <class name="OfferListsTest"/>
+            <class name="BaseTest"/>
         </classes>
     </test>
 </suite>
