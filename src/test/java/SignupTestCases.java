@@ -1,92 +1,87 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
-public class SignupTestCases {
-    WebDriver driver;
-
-    @BeforeMethod
-    public void setup() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get("https://kwidos.com/auth/register/contractor");
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-    }
-    @AfterMethod
-    public void tearDown() {
-        driver.quit();
-    }
+public class SignupTestCases extends BaseTest{
+    Random randomGenerator = new Random();
+    int randomInt = randomGenerator.nextInt(1000);
 
     @Test
     public void serviceProviderRegistrationSignUpSuccess() throws InterruptedException {
-        //random generator for different emails.
-        Random randomGenerator = new Random();
-        int randomInt = randomGenerator.nextInt(1000);
+        serviceProviderSignUpPageLink();
+        firstName("Emad");
+        lastName("Alghweir");
+        businessName("Testpro");
+        phoneNumber("1234567890");
+        email("username" + randomInt + "@ gmail.com");
+        passwordInput("Testing123456!");
+        checkBox();
+        createAccountButton();
 
-        Thread.sleep(3000);
-        driver.findElement(By.cssSelector("[formcontrolname='firstName']")).sendKeys("Emad");
-        driver.findElement(By.cssSelector("[formcontrolname='lastName']")).sendKeys("Alghweir");
-        driver.findElement(By.cssSelector("[formcontrolname='businessName']")).sendKeys("Testpro");
-        driver.findElement(By.cssSelector("[formcontrolname='phone']")).sendKeys("1234567890");
-        driver.findElement(By.cssSelector("[formcontrolname='email']")).sendKeys("username" + randomInt + "@gmail.com");
-        driver.findElement(By.cssSelector("[formcontrolname='password']")).sendKeys("Testing123456!");
-        driver.findElement(By.cssSelector(".ui-chkbox")).click();
-        driver.findElement(By.cssSelector("type*=submit")).click();
         String actualText = driver.findElement(By.cssSelector(".alert.alert-danger")).getText();
         Assert.assertEquals(actualText, "Congratulations! Your account has been created successfully!");
     }
 
     @Test
     public void serviceProviderRegistrationSignUpWrongEmail() throws InterruptedException {
-        //random generator for different emails.
-        Random randomGenerator = new Random();
-        int randomInt = randomGenerator.nextInt(1000);
-        Thread.sleep(3000);
-        driver.findElement(By.cssSelector("[formcontrolname='firstName']")).sendKeys("hello");
-        Thread.sleep(1000);
-        driver.findElement(By.cssSelector("[formcontrolname='lastName']")).sendKeys("QA");
-        Thread.sleep(1000);
-        driver.findElement(By.cssSelector("[formcontrolname='businessName']")).sendKeys("here");
-        Thread.sleep(1000);
-        driver.findElement(By.cssSelector("[formcontrolname='phone']")).sendKeys("9876543210");
-        Thread.sleep(1000);
-        driver.findElement(By.cssSelector("[formcontrolname='email']")).sendKeys("hellohellohellohellohellohellohellohellohellohellohellohellohello" + randomInt + "@1234567890101112131415.com");
-        Thread.sleep(1000);
-        driver.findElement(By.cssSelector("[formcontrolname='password']")).click();
-       // driver.findElement(By.cssSelector("type*=submit")).click();
-       Thread.sleep(3000);
+        serviceProviderSignUpPageLink();
+        firstName("hello");
+        lastName("QA");
+        businessName("here");
+        phoneNumber("9876543210");
+        email("hellohellohellohellohellohellohellohellohellohellohellohellohello" + randomInt + "@1234567890101112131415.com");
+        password();
+
         String actualText = driver.findElement(By.xpath("//div/app-field-error-display/div//small")).getText();
         Assert.assertEquals(actualText, "Please enter your Email address");
     }
 
     @Test
-    public void serviceProviderRegistrationSignUpSameCredentials() throws InterruptedException {
-        Thread.sleep(3000);
-        driver.findElement(By.cssSelector("[formcontrolname='firstName']")).sendKeys("");
-        Thread.sleep(1000);
-        driver.findElement(By.cssSelector("[formcontrolname='lastName']")).sendKeys("");
-        Thread.sleep(1000);
-        driver.findElement(By.cssSelector("[formcontrolname='businessName']")).sendKeys("");
-        Thread.sleep(1000);
-        driver.findElement(By.cssSelector("[formcontrolname='phone']")).sendKeys("");
-        Thread.sleep(1000);
-        driver.findElement(By.cssSelector("[formcontrolname='email']")).sendKeys("");
-        Thread.sleep(1000);
-        driver.findElement(By.cssSelector("[formcontrolname='password']")).sendKeys("");
-        Thread.sleep(1000);
-        Thread.sleep(1000);
-        driver.findElement(By.cssSelector("type*=submit")).click();
+    public void serviceProviderRegistrationSignUpEmptyCredentials() throws InterruptedException {
+
+        serviceProviderSignUpPageLink();
+        firstName("");
+        lastName("");
+        businessName("");
+        phoneNumber("");
+        email("");
+        passwordInput("");
+        createAccountButton();
+
         String actualText = driver.findElement(By.cssSelector("type*=submit")).getText();
         Assert.assertEquals(actualText, false);
 
     }
 
+      public void serviceProviderSignUpPageLink(){
+        driver.get("https://kwidos.com/auth/register/contractor");
+    }
+      public void firstName(String firstName){
+          driver.findElement(By.cssSelector("[formcontrolname='firstName']")).sendKeys(firstName);
+    } public void lastName(String lastName){
+        driver.findElement(By.cssSelector("[formcontrolname='lastName']")).sendKeys(lastName);
+    } public void businessName(String businessName){
+        driver.findElement(By.cssSelector("[formcontrolname='businessName']")).sendKeys(businessName);
+    } public void phoneNumber(String PhoneNumber){
+        driver.findElement(By.cssSelector("[formcontrolname='phone']")).sendKeys(PhoneNumber);
+    }
+      public void email(String Email){
+        driver.findElement(By.cssSelector("[formcontrolname='email']")).sendKeys(Email);
+    }
+      public void password(){
+        driver.findElement(By.cssSelector("[formcontrolname='password']")).click();
+    }
+      public void passwordInput(String Password){
+          driver.findElement(By.cssSelector("[formcontrolname='password']")).sendKeys(Password);
+      }
+      public void checkBox(){
+        driver.findElement(By.cssSelector("[class*='ui-chkbox ui']")).click();
+    }
+      public void createAccountButton(){
+        driver.findElement(By.cssSelector("type*=submit")).click();
+    }
+
 }
+

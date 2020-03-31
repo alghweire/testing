@@ -9,34 +9,17 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 
-public class HomePageTest {
-     WebDriver  driver;
-
-    @BeforeMethod
-    public void setup (){
-        driver = new ChromeDriver();
-        driver.get("https://kwidos.com/");
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-    }
-
-
-    @AfterMethod
-    public void tearDown(){
-
-        driver.quit();
-    }
+public class HomePageTest extends BaseTest{
 
     @Test
     public void titleTest() throws InterruptedException {
         //  go to home page https://kwidos.com/
         // verify title is equal to kwidos.
-
+        driver.get("https://kwidos.com/");
         String title = driver.getTitle();
         Assert.assertEquals(title, "Kwidos");
 
     }
-
 
     @Test
     public void LoginWrongCredentialsTest() throws InterruptedException {

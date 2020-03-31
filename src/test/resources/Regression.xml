@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Tests">
-    <test name="TitleTest" preserve-order="false">
+<suite name="Regression Tests">
+    <test name="regression test" preserve-order="false">
         <classes>
             <class name="HomePageTest"/>
             <class name="LoginTestCases"/>

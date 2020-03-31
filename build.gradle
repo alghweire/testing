@@ -19,10 +19,15 @@ dependencies {
     testCompile group: 'org.testng', name: 'testng', version: '7.1.0'
 
 }
-test{
+task testRegression(type: Test){
         useTestNG(){
-            suites "src/test/resources/TestNG.xml"
+            suites "src/test/resources/Regression.xml"
         }
+}
+task testSmoke(type: Test){
+        useTestNG(){
+            suites "src/test/resources/Smoke.xml"
     }
+}
 
 
