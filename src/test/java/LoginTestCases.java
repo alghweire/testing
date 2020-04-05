@@ -1,6 +1,7 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -16,7 +17,7 @@ public class LoginTestCases extends BaseTest{
         enterPassword("Testing123!");
         clickSubmitButton();
 
-        String actualText = driver.findElement(By.xpath("//*[@class='title']")).getText(); //Wont work because of captcha.
+        String actualText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='title']"))).getText(); //Wont work because of captcha.
         Assert.assertEquals(actualText, "Let's get it started!");
     }
     @Test
@@ -26,10 +27,10 @@ public class LoginTestCases extends BaseTest{
         enterPassword("");
         clickSubmitButton();
 
-        String emailErrorMessage = driver.findElement(By.cssSelector("input#email+div")).getText();
+        String emailErrorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#email+div"))).getText();
         Assert.assertEquals(emailErrorMessage, "Email is required");
 
-        String passwordErrorMessage = driver.findElement(By.cssSelector("input#password+div+div")).getText();
+        String passwordErrorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#password+div+div"))).getText();
         Assert.assertEquals(passwordErrorMessage, "Password is required");
     }
 
@@ -40,7 +41,7 @@ public class LoginTestCases extends BaseTest{
         enterPassword("wrongpassword");
         clickSubmitButton();
 
-        String actualText = driver.findElement(By.cssSelector(".alert.alert-danger")).getText(); //Wont work because of captcha.
+        String actualText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".alert.alert-danger"))).getText(); //Wont work because of captcha.
         Assert.assertEquals(actualText, "Username or password is incorrect");
 
     }
@@ -51,9 +52,8 @@ public class LoginTestCases extends BaseTest{
         enterPassword("Testing123!");
         clickSubmitButton();
 
-        String actualText = driver.findElement(By.cssSelector(".alert.alert-danger")).getText(); //Wont work because of captcha.
+        String actualText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".alert.alert-danger"))).getText(); //Wont work because of captcha.
         Assert.assertEquals(actualText, "Username or password is incorrect");
-        driver.quit();
     }
     @Test
     public void LoginWrongCredentialsExistingEmailWrongPassword() throws InterruptedException {
@@ -62,9 +62,8 @@ public class LoginTestCases extends BaseTest{
         enterPassword("wrongpassword");
         clickSubmitButton();
 
-        String actualText = driver.findElement(By.cssSelector(".alert.alert-danger")).getText(); //Wont work because of captcha.
+        String actualText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".alert.alert-danger"))).getText(); //Wont work because of captcha.
         Assert.assertEquals(actualText, "Username or password is incorrect");
-        driver.quit();
     }
     @Test
     public void LoginCredentialsCaseSensitiveAllCaps() throws InterruptedException {
@@ -73,20 +72,27 @@ public class LoginTestCases extends BaseTest{
         enterPassword("Testing123!");
         clickSubmitButton();
 
-        String actualText = driver.findElement(By.xpath("//*[@class='title']")).getText(); //Wont work because of captcha.
+        String actualText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='title']"))).getText(); //Wont work because of captcha.
         Assert.assertEquals(actualText, "Let's get it started!");
   }
     public void loginPage(){
-      driver.get("https://kwidos.com/auth/login");
+
+        driver.get("https://kwidos.com/auth/login");
   }
     public void enterEmail(String Email){
-      driver.findElement(By.cssSelector("#email")).sendKeys(Email);
+
+       // driver.findElement(By.cssSelector("#email")).sendKeys(Email);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#email"))).click();
   }
     public void enterPassword(String Password){
-      driver.findElement(By.cssSelector("#password")).sendKeys(Password);
+
+     //driver.findElement(By.cssSelector("#password")).sendKeys(Password);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#password"))).click();
   }
     public void clickSubmitButton() {
-      driver.findElement(By.cssSelector("[type='submit']")).click();
+
+     //driver.findElement(By.cssSelector("[type='submit']")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type='submit']"))).click();
   }
 
 }
