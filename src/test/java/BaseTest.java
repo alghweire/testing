@@ -17,9 +17,9 @@ public class BaseTest {
         options.addArguments("ignore-certificate-errors");
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 
-        WebDriverWait wait = new WebDriverWait(driver, 4);
+        WebDriverWait wait = new WebDriverWait(driver, 20);
 
     }
     @AfterMethod

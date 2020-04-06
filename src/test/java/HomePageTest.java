@@ -1,6 +1,11 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -29,10 +34,10 @@ public class HomePageTest extends BaseTest{
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
         //email locator
-        Thread.sleep(4000);
+
         driver.findElement(By.cssSelector("#email")).sendKeys("wrong@email.com");
         //password locator
-        Thread.sleep(4000);
+
         driver.findElement(By.cssSelector("#password")).sendKeys("wrongpassword");
 
         driver.findElement(By.cssSelector("[type='submit']")).click();
@@ -69,4 +74,18 @@ public class HomePageTest extends BaseTest{
         Assert.assertEquals(actualText, "Username or password is incorrect");
     }
 
+    @Test
+    public void Scrolling() throws InterruptedException {
+
+        driver.get("https://kwidos.tk");
+
+         WebElement job = driver.findElement(By.xpath("//*[contains(text(), 'Bjj')]"));
+
+         JavascriptExecutor js = (JavascriptExecutor) driver;
+
+          js.executeScript("arguments[0].scrollIntoView()", job);
+
+          wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(), 'Bjj')]"))).click();
+
+    }
 }

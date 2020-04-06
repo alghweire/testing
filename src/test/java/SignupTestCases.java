@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class SignupTestCases extends BaseTest{
     Random randomGenerator = new Random();
-    int randomInt = randomGenerator.nextInt(1000);
+    int randomInt = randomGenerator.nextInt(100000);
 
     @Test
     public void serviceProviderRegistrationSignUpSuccess() throws InterruptedException {
@@ -18,11 +18,12 @@ public class SignupTestCases extends BaseTest{
         phoneNumber("1234567890");
         email("username" + randomInt + "@ gmail.com");
         passwordInput("Testing123456!");
-        checkBox();
+        checkBoxLinkTheReferer();
+        checkBoxAgreeToTheTerms();
         createAccountButton();
 
-       // String actualText = driver.findElement(By.cssSelector(".alert.alert-danger")).getText();
-        String actualText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".alert.alert-danger"))).getText();
+        String actualText = driver.findElement(By.cssSelector(".alert.alert-danger")).getText();
+        //String actualText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".alert.alert-danger"))).getText();
         Assert.assertEquals(actualText, "Congratulations! Your account has been created successfully!");
     }
 
@@ -61,12 +62,12 @@ public class SignupTestCases extends BaseTest{
 
       public void serviceProviderSignUpPageLink(){
 
-        driver.get("https://kwidos.com/auth/register/contractor");
+        driver.get("https://kwidos.tk/auth/register/contractor");
     }
       public void firstName(String firstName){
 
-         // driver.findElement(By.cssSelector("[formcontrolname='firstName']")).sendKeys(firstName);
-          wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[formcontrolname='firstName']"))).sendKeys(firstName);
+         //driver.findElement(By.cssSelector("[formcontrolname='firstName']")).sendKeys(firstName);
+         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[formcontrolname='firstName']"))).sendKeys(firstName);
     }
     public void lastName(String lastName){
 
@@ -77,7 +78,7 @@ public class SignupTestCases extends BaseTest{
     public void businessName(String businessName){
 
        // driver.findElement(By.cssSelector("[formcontrolname='businessName']")).sendKeys(businessName);
-         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[formcontrolname='businessName']"))).sendKeys(businessName);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[formcontrolname='businessName']"))).sendKeys(businessName);
     }
     public void phoneNumber(String PhoneNumber){
 
@@ -86,28 +87,31 @@ public class SignupTestCases extends BaseTest{
     }
       public void email(String Email){
 
-       // driver.findElement(By.cssSelector("[formcontrolname='email']")).sendKeys(Email);
-       wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[formcontrolname='email']"))).sendKeys(Email);
+       //driver.findElement(By.cssSelector("[formcontrolname='email']")).sendKeys(Email);
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[formcontrolname='email']"))).sendKeys(Email);
     }
       public void password(){
 
-      //  driver.findElement(By.cssSelector("[formcontrolname='password']")).click();
+        //driver.findElement(By.cssSelector("[formcontrolname='password']")).click();
       wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[formcontrolname='password']"))).click();
     }
       public void passwordInput(String Password){
 
-         // driver.findElement(By.cssSelector("[formcontrolname='password']")).sendKeys(Password);
-       wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[formcontrolname='password']"))).sendKeys(Password);
+        // driver.findElement(By.cssSelector("[formcontrolname='password']")).sendKeys(Password);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[formcontrolname='password']"))).sendKeys(Password);
       }
-      public void checkBox(){
-
-      //  driver.findElement(By.cssSelector("[class*='ui-chkbox ui']")).click();
-     wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[class*='ui-chkbox ui']"))).click();
+      public void checkBoxLinkTheReferer(){
+        //driver.findElement(By.cssSelector("[class='ui-chkbox-label']")).click();
+     wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[class='ui-chkbox-label']"))).click();
 
     }
-      public void createAccountButton(){
+    public void checkBoxAgreeToTheTerms() {
+        // driver.findElement(By.cssSelector("[class='ui-chkbox-icon ui-clickable pi pi-check']")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[class='ui-chkbox-icon ui-clickable pi pi-check']"))).click();
+    }
 
-      //  driver.findElement(By.cssSelector("type*=submit")).click();
+      public void createAccountButton(){
+       //driver.findElement(By.cssSelector("[type='submit']")).click();
      wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("type*=submit"))).click();
 
     }

@@ -75,6 +75,19 @@ public class LoginTestCases extends BaseTest{
         String actualText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='title']"))).getText(); //Wont work because of captcha.
         Assert.assertEquals(actualText, "Let's get it started!");
   }
+   // @Test
+   // public void clearCookiesTestExample() {
+      //  loginPage();
+       // enterEmail("ealghweir@yahoo.com");
+       // enterPassword("Testing123!");
+       // clickSubmitButton();
+
+      //  driver.findElement(By.xpath("//*[contains(text(), 'NEU')]Go TO PROFILE"));
+      //  driver.manage().deleteAllCookies();
+
+      //  driver.get("https://kwidos.tk");
+
+ // }
     public void loginPage(){
 
         driver.get("https://kwidos.com/auth/login");
