@@ -1,0 +1,21 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="testSmoke">
+    <test name="testSmoke" preserve-order="false">
+        <classes>
+            <class name="BaseTest"/>
+            <class name="HomePageTest"/>
+                  <methods>
+                          <include name="titleTest"> </include>
+                  </methods>
+            <class name="LoginTestCases"/>
+                  <methods>
+                          <include name="LoginWrongCredentialsTest"> </include>
+                          <include name="LoginCorrectCredentialsTest"> </include>
+                  </methods>
+            <class name="SignupTestCases"/>
+                  <methods>
+                          <include name="serviceProviderRegistrationSignUpSuccess"> </include>
+                  </methods>
+        </classes>
+    </test>
+</suite>
