@@ -11,19 +11,17 @@ public class AdvancedTests extends BaseTest{
     public void multipleTabs(){
        driver.get("https://kwidos.tk/share");
 
-       String mainwindow = driver.getWindowHandle();
+        String mainwindow = driver.getWindowHandle();
 
-       driver.findElement(By.xpath("//*[contains(text(), 'Twitter')")).click();
+        driver.findElement(By.xpath("//*[contains(text(), 'Twitter')")).click();
 
         String twitterWindow = driver.getWindowHandle();
 
-       driver.switchTo().window(mainwindow); //to switch windows to main window.
+        driver.switchTo().window(mainwindow); //to switch windows to main window.
 
         driver.switchTo().window(twitterWindow);
 
     }
-
-
 
     @Test
     public void scrollingTest() {

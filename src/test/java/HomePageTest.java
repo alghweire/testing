@@ -55,12 +55,10 @@ public class HomePageTest extends BaseTest{
 
         //email locator
 
-
         //random generator for different emails.
         Random randomGenerator = new Random();
         int randomInt = randomGenerator.nextInt(10000);
 
-        Thread.sleep(4000);
         driver.findElement(By.cssSelector("[formcontrolname='firstName']")).sendKeys("Emad");
         driver.findElement(By.cssSelector("[formcontrolname='lastName']")).sendKeys("Alghweir");
         driver.findElement(By.cssSelector("[formcontrolname='businessName']")).sendKeys("Testpro");
@@ -79,13 +77,11 @@ public class HomePageTest extends BaseTest{
 
         driver.get("https://kwidos.tk");
 
-         WebElement job = driver.findElement(By.xpath("//*[contains(text(), 'Bjj')]"));
+        WebElement scroll = driver.findElement(By.xpath("//*[contains(text(), 'sdfs')]"));
 
-         JavascriptExecutor js = (JavascriptExecutor) driver;
+        JavascriptExecutor js = (JavascriptExecutor) driver;
 
-          js.executeScript("arguments[0].scrollIntoView()", job);
-
-          wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(), 'Bjj')]"))).click();
+        js.executeScript("arguments[0].scrollIntoView()", scroll);
 
     }
 }

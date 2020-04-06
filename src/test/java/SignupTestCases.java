@@ -36,6 +36,8 @@ public class SignupTestCases extends BaseTest{
         phoneNumber("9876543210");
         email("hellohellohellohellohellohellohellohellohellohellohellohellohello" + randomInt + "@1234567890101112131415.com");
         password();
+        checkBoxLinkTheReferer();
+        checkBoxAgreeToTheTerms();
 
         //String actualText = driver.findElement(By.xpath("//div/app-field-error-display/div//small")).getText();
         String actualText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div/app-field-error-display/div//small"))).getText();
@@ -52,6 +54,8 @@ public class SignupTestCases extends BaseTest{
         phoneNumber("");
         email("");
         passwordInput("");
+        checkBoxLinkTheReferer();
+        checkBoxAgreeToTheTerms();
         createAccountButton();
 
        //String actualText = driver.findElement(By.cssSelector("type*=submit")).getText();
